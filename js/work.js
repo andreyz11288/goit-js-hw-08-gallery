@@ -4,17 +4,17 @@ const divEl = document.querySelector(".js-lightbox");
 const btnEl = document.querySelector(".lightbox__button");
 const divModalEl = document.querySelector(".lightbox__content");
 
-const redEl = defaultEl.reduce((acc, el) => {
+const newStringEl = defaultEl.reduce((acc, { preview, description }) => {
   return (acc += `<li class="gallery__item">
   <a class="gallery__link"  >
   <img class="gallery__image"
-  src="${el.preview}"
-  alt="${el.description}"
+  src="${preview}"
+  alt="${description}"
   />
   </a>
   </li>`);
 }, "");
-ulRef.innerHTML = redEl;
+ulRef.innerHTML = newStringEl;
 
 const imgEl = document.querySelector(".gallery__image");
 
@@ -37,6 +37,7 @@ function e(eve) {
     alt="${bigImgEl}"
   />`;
 }
+
 btnEl.addEventListener("click", () => {
   divEl.classList.remove("is-open");
 });
