@@ -8,7 +8,7 @@ const overEl = document.querySelector('.lightbox__overlay');
 
 const newStringEl = defaultEl.reduce((acc, { preview, description }) => {
   return (acc += `<li class="gallery__item">
-  <a class="gallery__link" href="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" >
+  <a class="gallery__link" href="${preview}" >
   <img class="gallery__image"
   src="${preview}"
   alt="${description}"
@@ -64,6 +64,8 @@ overEl.addEventListener('click', () => {
 
 document.addEventListener('keydown', eve => {
   const divCloseModal = document.querySelector('.lightbox__image');
+
+  // Кнопка Esc //
   if (eve.code === 'Escape') {
     divEl.classList.remove('is-open');
     divCloseModal.alt = '';
@@ -72,27 +74,29 @@ document.addEventListener('keydown', eve => {
   if (divEl.classList[2]) {
     const mapDefEl = defaultEl.map(value => value.original);
     const indElNum = Number(mapDefEl.indexOf(divCloseModal.src));
-    // Кнопка влево //
+
+    // Кнопка влево, вверх //
+    const mapDelLight = Number(mapDefEl.length) - 1;
     if (eve.code === 'ArrowLeft' || eve.code === 'ArrowUp') {
       if (eve.target.className === imgEl.className) {
         return;
       }
       const indLeftEl = indElNum - 1;
-      if (indElNum === 0) {
-        return;
-      }
       divCloseModal.src = mapDefEl[indLeftEl];
+      if (indElNum === 0) {
+        divCloseModal.src = mapDefEl[mapDelLight];
+      }
     }
-    // Кнопка вправо //
+    // Кнопка вправо, вниз //
     if (eve.code === 'ArrowRight' || eve.code === 'ArrowDown') {
       if (eve.target.className === imgEl.className) {
         return;
       }
       const indEl = indElNum + 1;
-      if (indEl === mapDefEl.length) {
-        return;
-      }
       divCloseModal.src = mapDefEl[indEl];
+      if (indEl === mapDefEl.length) {
+        divCloseModal.src = mapDefEl[0];
+      }
     }
   }
 });
