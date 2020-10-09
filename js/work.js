@@ -88,7 +88,11 @@ document.addEventListener('keydown', eve => {
       }
     }
     // Кнопка вправо, вниз //
-    if (eve.code === 'ArrowRight' || eve.code === 'ArrowDown') {
+    if (
+      eve.code === 'ArrowRight' ||
+      eve.code === 'ArrowDown' ||
+      eve.code === 'Space'
+    ) {
       if (eve.target.className === imgEl.className) {
         return;
       }
