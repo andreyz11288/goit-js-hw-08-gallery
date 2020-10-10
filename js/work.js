@@ -4,7 +4,6 @@ const divEl = document.querySelector('.js-lightbox');
 const btnEl = document.querySelector('.lightbox__button');
 const divModalEl = document.querySelector('.lightbox__content');
 const overEl = document.querySelector('.lightbox__overlay');
-// const divCloseModal = document.querySelector('.lightbox__image');
 
 const newStringEl = defaultEl.reduce((acc, { preview, description }) => {
   return (acc += `<li class="gallery__item">
@@ -46,19 +45,16 @@ btnEl.addEventListener('click', () => {
   divEl.classList.remove('is-open');
 });
 
-const closeModalEl = document.querySelector('[data-action="close-lightbox"]');
-closeModalEl.addEventListener('click', () => {
-  const divCloseModal = document.querySelector('.lightbox__image');
-  divCloseModal.alt = '';
-  divCloseModal.src = '';
-});
-
-overEl.addEventListener('click', () => {
+function isOpen() {
   const divCloseModal = document.querySelector('.lightbox__image');
   divEl.classList.remove('is-open');
   divCloseModal.alt = '';
   divCloseModal.src = '';
-});
+}
+const closeModalEl = document.querySelector('[data-action="close-lightbox"]');
+closeModalEl.addEventListener('click', isOpen);
+
+overEl.addEventListener('click', isOpen);
 
 // Управление кнопками //
 
