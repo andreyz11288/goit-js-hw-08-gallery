@@ -1,13 +1,12 @@
 import defaultEl from './gallery-items.js';
 const ulRef = document.querySelector('.js-gallery');
 const divEl = document.querySelector('.js-lightbox');
-const btnEl = document.querySelector('.lightbox__button');
+const btnEl = document.querySelector('button[data-action ="close-lightbox"]');
 const divModalEl = document.querySelector('.lightbox__content');
 const overEl = document.querySelector('.lightbox__overlay');
-
-const newStringEl = defaultEl.reduce((acc, { preview, description }) => {
+const newStringEl = defaultEl.reduce((acc, { preview, description, original }) => {
   return (acc += `<li class="gallery__item">
-  <a class="gallery__link" href="${preview}" >
+  <a class="gallery__link" href="${original}" >
   <img class="gallery__image"
   src="${preview}"
   alt="${description}"
@@ -19,7 +18,9 @@ ulRef.innerHTML = newStringEl;
 
 const imgEl = document.querySelector('.gallery__image');
 
-ulRef.addEventListener('click', e);
+ulRef.addEventListener('click', e);     
+
+    
 
 let element;
 function e(eve) {
@@ -39,11 +40,15 @@ function e(eve) {
     src="${element}"
     alt="${bigImgEl}"
   />`;
+  
 }
+
 
 btnEl.addEventListener('click', () => {
   divEl.classList.remove('is-open');
 });
+
+// Очистка пути после закрытия модалки//
 
 function isOpen() {
   const divCloseModal = document.querySelector('.lightbox__image');
@@ -63,11 +68,9 @@ document.addEventListener('keydown', eve => {
 
   // Кнопка Esc //
   if (eve.code === 'Escape') {
-    divEl.classList.remove('is-open');
-    divCloseModal.alt = '';
-    divCloseModal.src = '';
+    isOpen()
   }
-  if (divEl.classList[2]) {
+  if (divEl.className.includes('is-open')) {
     const mapDefEl = defaultEl.map(value => value.original);
     const indElNum = Number(mapDefEl.indexOf(divCloseModal.src));
 
