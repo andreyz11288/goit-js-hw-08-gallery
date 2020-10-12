@@ -7,7 +7,7 @@ const overEl = document.querySelector('.lightbox__overlay');
 const newStringEl = defaultEl.reduce((acc, { preview, description, original }) => {
   return (acc += `<li class="gallery__item">
   <a class="gallery__link" href="${original}" >
-  <img class="gallery__image"
+  <img loading="lazy" class="gallery__image"
   src="${preview}"
   alt="${description}"
   />
